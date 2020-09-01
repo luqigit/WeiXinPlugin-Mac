@@ -1,0 +1,6 @@
+framework module WeiXinPlugin {
+  umbrella header "WeiXinPlugin.h"
+
+  export *
+  module * { export * }
+}
