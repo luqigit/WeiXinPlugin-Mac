@@ -20,7 +20,6 @@
 }
 
 - (void)initMenuItems{
-    NSLog(@"++++++++ initMenuItems init ++++++++");
     NSMenuItem * preventRevokeItem = [[NSMenuItem alloc] initWithTitle:@"开启消息防撤回" action:@selector(onPreventRevoke:) keyEquivalent:@""];
     preventRevokeItem.target = self;
     preventRevokeItem.state = [[WeChatConfig sharedConfig] preventRevokeEnable];
@@ -39,9 +38,15 @@
         
     }
     
+    // open 记录
+    NSMenuItem * openFileItem = [[NSMenuItem alloc] initWithTitle:@"打开关键字记录" action:@selector(onOpenKeyWordLog:) keyEquivalent:@""];
+    openFileItem.target = self;
+    
     
     NSMenu *subMenu = [[NSMenu alloc] initWithTitle:@"微信小助手"];
     [subMenu addItem:preventRevokeItem];
+    [subMenu addItem:openFileItem];
+    
    
     NSMenuItem *menuItem = [[NSMenuItem alloc] init];
     [menuItem setSubmenu:subMenu];
@@ -71,7 +76,6 @@
         preventSelfRevokeItem.target = self;
         preventSelfRevokeItem.state = [[WeChatConfig sharedConfig] preventSelfRevokeEnable];
         
-        
         NSMenu *subPreventMenu = [[NSMenu alloc] initWithTitle:@"开启消息防撤回"];
         [subPreventMenu addItem:preventSelfRevokeItem];
         item.submenu = subPreventMenu;
@@ -87,6 +91,17 @@
     item.state = !item.state;
     [[WeChatConfig sharedConfig] setPreventSelfRevokeEnable:item.state];
 }
+
+#pragma mark - 打开日志
+- (void)onOpenKeyWordLog:(NSMenuItem *)item
+{
+    if(![WeChatConfig isLogin]){
+        return;
+    }
+    
+    [[NSWorkspace sharedWorkspace] openFile:[WeChatConfig getKeyWordLogSaveFile]];
+}
+
 
 
 @end

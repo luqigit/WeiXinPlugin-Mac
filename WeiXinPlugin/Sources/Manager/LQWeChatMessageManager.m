@@ -9,6 +9,7 @@
 #import "LQWeChatMessageManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "WeChatConfig.h"
+#import <objc/runtime.h>
 
 @interface LQWeChatMessageManager()
 @property (nonatomic, strong) MessageService *service;

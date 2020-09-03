@@ -16,6 +16,10 @@
 		CD428E2024FDFA250012F24E /* WeChatDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = CD428E1F24FDFA250012F24E /* WeChatDefine.h */; };
 		CD428E2324FDFB070012F24E /* LQWeChatMessageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CD428E2124FDFB070012F24E /* LQWeChatMessageManager.h */; };
 		CD428E2424FDFB070012F24E /* LQWeChatMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD428E2224FDFB070012F24E /* LQWeChatMessageManager.m */; };
+		CD664A1524FF380A00901A95 /* SwizzledHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = CD664A1324FF380A00901A95 /* SwizzledHelper.h */; };
+		CD664A1624FF380A00901A95 /* SwizzledHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD664A1424FF380A00901A95 /* SwizzledHelper.m */; };
+		CD664A1924FF3F3D00901A95 /* LQIMContactsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CD664A1724FF3F3D00901A95 /* LQIMContactsManager.h */; };
+		CD664A1A24FF3F3D00901A95 /* LQIMContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD664A1824FF3F3D00901A95 /* LQIMContactsManager.m */; };
 		CD70FF6E24FD375A00A988F0 /* WeiXinPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD70FF6424FD375A00A988F0 /* WeiXinPlugin.framework */; };
 		CD70FF7324FD375A00A988F0 /* WeiXinPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD70FF7224FD375A00A988F0 /* WeiXinPluginTests.m */; };
 		CD70FF7524FD375A00A988F0 /* WeiXinPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = CD70FF6724FD375A00A988F0 /* WeiXinPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +50,10 @@
 		CD428E1F24FDFA250012F24E /* WeChatDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatDefine.h; sourceTree = "<group>"; };
 		CD428E2124FDFB070012F24E /* LQWeChatMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQWeChatMessageManager.h; sourceTree = "<group>"; };
 		CD428E2224FDFB070012F24E /* LQWeChatMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQWeChatMessageManager.m; sourceTree = "<group>"; };
+		CD664A1324FF380A00901A95 /* SwizzledHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwizzledHelper.h; sourceTree = "<group>"; };
+		CD664A1424FF380A00901A95 /* SwizzledHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwizzledHelper.m; sourceTree = "<group>"; };
+		CD664A1724FF3F3D00901A95 /* LQIMContactsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQIMContactsManager.h; sourceTree = "<group>"; };
+		CD664A1824FF3F3D00901A95 /* LQIMContactsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQIMContactsManager.m; sourceTree = "<group>"; };
 		CD70FF6424FD375A00A988F0 /* WeiXinPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeiXinPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD70FF6724FD375A00A988F0 /* WeiXinPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeiXinPlugin.h; sourceTree = "<group>"; };
 		CD70FF6824FD375A00A988F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +93,8 @@
 				CD428E0F24FDE8C50012F24E /* WeChatPluginManager.m */,
 				CD428E2124FDFB070012F24E /* LQWeChatMessageManager.h */,
 				CD428E2224FDFB070012F24E /* LQWeChatMessageManager.m */,
+				CD664A1724FF3F3D00901A95 /* LQIMContactsManager.h */,
+				CD664A1824FF3F3D00901A95 /* LQIMContactsManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -96,6 +106,15 @@
 				CD428E1424FDE9A20012F24E /* WeChatConfig.m */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		CD664A1224FF37FD00901A95 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CD664A1324FF380A00901A95 /* SwizzledHelper.h */,
+				CD664A1424FF380A00901A95 /* SwizzledHelper.m */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		CD70FF5A24FD375A00A988F0 = {
@@ -139,6 +158,7 @@
 		CD70FF7E24FD376600A988F0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CD664A1224FF37FD00901A95 /* Helper */,
 				CD428E1224FDE9910012F24E /* Config */,
 				CD428E0D24FDE8910012F24E /* Manager */,
 				CD70FF8324FD379500A988F0 /* Hook */,
@@ -175,9 +195,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD664A1924FF3F3D00901A95 /* LQIMContactsManager.h in Headers */,
 				CD428E1524FDE9A20012F24E /* WeChatConfig.h in Headers */,
 				CD70FF7524FD375A00A988F0 /* WeiXinPlugin.h in Headers */,
 				CD428E2024FDFA250012F24E /* WeChatDefine.h in Headers */,
+				CD664A1524FF380A00901A95 /* SwizzledHelper.h in Headers */,
 				CD428E2324FDFB070012F24E /* LQWeChatMessageManager.h in Headers */,
 				CD428E1024FDE8C50012F24E /* WeChatPluginManager.h in Headers */,
 				CD70FF8A24FD37CD00A988F0 /* fishhook.h in Headers */,
@@ -197,6 +219,7 @@
 				CD70FF6024FD375A00A988F0 /* Sources */,
 				CD70FF6124FD375A00A988F0 /* Frameworks */,
 				CD70FF6224FD375A00A988F0 /* Resources */,
+				CD664A1124FF370E00901A95 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -280,6 +303,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CD664A1124FF370E00901A95 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#!/bin/bash\napp_name=\"WeChat\"\nframework_name=\"WeiXinPlugin\"\napp_bundle_path=\"/Applications/${app_name}.app/Contents/MacOS\"\napp_executable_path=\"${app_bundle_path}/${app_name}\"\napp_executable_backup_path=\"${app_executable_path}_backup\"\nframework_path=\"${app_bundle_path}/${framework_name}.framework\"\n# 备份WeChat原始可执行文件\nif [ ! -f \"$app_executable_backup_path\" ]\nthen\ncp \"$app_executable_path\" \"$app_executable_backup_path\"\nfi\n\ncp -r \"${BUILT_PRODUCTS_DIR}/${framework_name}.framework\" ${app_bundle_path}\n./insert_dylib --all-yes \"${framework_path}/${framework_name}\" \"$app_executable_backup_path\" \"$app_executable_path\"\n";
+		};
 		CDABA23424FE2BE800E5BB06 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD664A1A24FF3F3D00901A95 /* LQIMContactsManager.m in Sources */,
 				CD428E1624FDE9A20012F24E /* WeChatConfig.m in Sources */,
 				CD70FF9324FD37E200A988F0 /* WeChat+hook.m in Sources */,
 				CD70FF8024FD377E00A988F0 /* main.m in Sources */,
@@ -311,6 +352,7 @@
 				CD428E2424FDFB070012F24E /* LQWeChatMessageManager.m in Sources */,
 				CD70FF8B24FD37CD00A988F0 /* fishhook.c in Sources */,
 				CD428E1A24FDF20D0012F24E /* GVUserDefaults.m in Sources */,
+				CD664A1624FF380A00901A95 /* SwizzledHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

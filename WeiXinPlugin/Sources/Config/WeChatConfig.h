@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableSet *revokeMsgSet;                /**<    撤回的消息集合    */
 + (instancetype)sharedConfig;
-
++ (BOOL) isLogin;
++ (NSString *)getKeyWordLogSaveFile;
 @end
 
 NS_ASSUME_NONNULL_END

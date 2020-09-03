@@ -119,4 +119,149 @@
 - (void)stop;
 @end
 
+@interface SKBuiltinString_t : NSObject
+@property(retain, nonatomic, setter=SetString:) NSString *string; // @synthesize string;
+@end
+
+@interface SKBuiltinBuffer_t : NSObject
+@property (nonatomic, strong) NSData *buffer;
+@end
+
+@interface AddMsg : NSObject
++ (id)parseFromData:(id)arg1;
+@property(retain, nonatomic, setter=SetPushContent:) NSString *pushContent;
+@property(readonly, nonatomic) BOOL hasPushContent;
+@property(retain, nonatomic, setter=SetMsgSource:) NSString *msgSource;
+@property(readonly, nonatomic) BOOL hasMsgSource;
+@property(readonly, nonatomic) BOOL hasCreateTime;
+@property(readonly, nonatomic) BOOL hasImgBuf;
+@property(nonatomic, setter=SetImgStatus:) unsigned int imgStatus;
+@property(readonly, nonatomic) BOOL hasImgStatus;
+@property(nonatomic, setter=SetStatus:) unsigned int status;
+
+@property(retain, nonatomic, setter=SetContent:) SKBuiltinString_t *content;
+@property(retain, nonatomic, setter=SetFromUserName:) SKBuiltinString_t *fromUserName;
+@property(nonatomic, setter=SetMsgType:) int msgType;
+@property(retain, nonatomic, setter=SetToUserName:) SKBuiltinString_t *toUserName;
+@property (nonatomic, assign) unsigned int createTime;
+@property(nonatomic, setter=SetNewMsgId:) long long newMsgId;
+@property (nonatomic, strong) SKBuiltinBuffer_t *imgBuf;
+@end
+
+#pragma mark - 通讯录
+
+@interface GroupStorage : NSObject
+{
+    NSMutableDictionary *m_dictGroupContacts;
+}
+- (id)GetAllGroups;
+- (id)GetGroupMemberContact:(id)arg1;
+- (void)UpdateGroupMemberDetailIfNeeded:(id)arg1 withCompletion:(id)arg2;
+- (BOOL)IsGroupContactExist:(id)arg1;
+- (BOOL)IsGroupMemberContactExist:(id)arg1;
+- (id)GetGroupContactList:(unsigned int)arg1 ContactType:(unsigned int)arg2;
+- (BOOL)AddGroupMembers:(id)arg1 withGroupUserName:(id)arg2 completion:(id)arg3;
+- (void)CreateGroupChatWithTopic:(id)arg1 groupMembers:(id)arg2 completion:(id)arg3;
+- (void)addChatMemberNeedVerifyMsg:(id)arg1 ContactList:(id)arg2;
+- (BOOL)QuitGroup:(id)arg1 completion:(id)arg2;
+- (BOOL)UIQuitGroup:(id)arg1;
+- (BOOL)UIQuitGroup:(id)arg1 withConfirm:(BOOL)arg2 completion:(id)arg3;
+@end
+
+@interface ContactStorage : NSObject
+- (id)GetSelfContact;
+- (id)GetContact:(id)arg1;
+- (id)GetAllBrandContacts;
+- (id)GetAllFavContacts;
+- (id)GetAllFriendContacts;
+- (id)GetContactWithUserName:(id)arg1 updateIfNeeded:(BOOL)arg2;
+- (id)getContactCache:(id)arg1;
+- (id)GetContactsWithUserNames:(id)arg1;
+- (id)GetGroupMemberContact:(id)arg1;
+- (id)GetGroupContact:(id)arg1;
+- (id)GetAllGroups;
+- (id)GetGroupContactList:(id)arg1 ContactType:(id)arg2;
+@end
+
+@interface ChatRoomData : NSObject
+@property(retain, nonatomic) NSMutableDictionary *m_dicData;
+@end
+
+@interface WCContactData : NSObject
+@property(retain, nonatomic) NSString *m_nsUsrName; // @synthesize m_nsUsrName;
+@property(nonatomic) unsigned int m_uiFriendScene;  // @synthesize m_uiFriendScene;
+@property(retain, nonatomic) NSString *m_nsNickName;    // 用户昵称
+@property(retain, nonatomic) NSString *m_nsRemark;      // 备注
+@property(retain, nonatomic) NSString *m_nsHeadImgUrl;  // 头像
+@property(retain, nonatomic) NSString *m_nsHeadHDImgUrl;
+@property(retain, nonatomic) NSString *m_nsHeadHDMd5;
+@property(retain, nonatomic) NSString *m_nsAliasName;
+@property(retain, nonatomic) NSString *avatarCacheKey;
+@property(retain, nonatomic) NSString *msgFromNickName;
+@property(retain, nonatomic) NSString *m_nsOwner;
+@property(retain, nonatomic) NSString *m_nsChatRoomMemList;
+@property(retain, nonatomic) ChatRoomData *m_chatRoomData;
+@property(nonatomic) unsigned int m_uiSex;
+@property(nonatomic) BOOL m_isShowRedDot;
+- (BOOL)isBrandContact;
+- (BOOL)isSelf;
+- (id)getGroupDisplayName;
+- (id)getContactDisplayUsrName;
+- (BOOL)isGroupChat;
+- (BOOL)isMMChat;
+- (BOOL)isMMContact;
+@end
+
+#pragma mark - MMSessionInfo
+
+@interface MMSessionInfoPackedInfo: NSObject
+@property(retain, nonatomic) WCContactData *m_contact;
+@property(retain, nonatomic) MessageData *m_msgData;
+@end
+
+@interface MMSessionInfo : NSObject
+@property(nonatomic) BOOL m_bIsTop; // @synthesize m_bIsTop;
+@property(nonatomic) BOOL m_bShowUnReadAsRedDot;
+@property(nonatomic) BOOL m_isMentionedUnread; // @synthesize
+@property(retain, nonatomic) NSString *m_nsUserName; // @synthesize m_nsUserName;
+@property(retain, nonatomic) MMSessionInfoPackedInfo *m_packedInfo;
+@property(nonatomic) unsigned int m_uUnReadCount;
+@end
+
+@interface MMSessionMgr : NSObject
+@property(retain, nonatomic) NSMutableArray *m_arrSession;
+@property(retain) NSString *m_currentSessionName; // @synthesize m_currentSessionName=_m_currentSessionName;
+- (id)getAllSessions;
+- (id)GetAllSessions;
+- (id)GetSessionAtIndex:(unsigned long long)arg1;//2.3.24废弃
+- (id)sessionInfoByUserName:(id)arg1;
+- (void)MuteSessionByUserName:(id)arg1;
+- (void)muteSessionByUserName:(id)arg1 syncToServer:(BOOL)arg2;
+- (void)onUnReadCountChange:(id)arg1;
+//- (void)TopSessionByUserName:(id)arg1;
+- (void)processOnEnterSession:(id)arg1 isFromLocal:(BOOL)arg2;
+- (void)UnmuteSessionByUserName:(id)arg1;
+- (void)unmuteSessionByUserName:(id)arg1 syncToServer:(BOOL)arg2;
+- (void)untopSessionByUserName:(id)arg1 syncToServer:(BOOL)arg2;
+- (void)deleteSessionWithoutSyncToServerWithUserName:(id)arg1;
+- (void)storageDeleteSessionInfo:(id)arg1;
+- (void)changeSessionUnreadCountWithUserName:(id)arg1 to:(unsigned int)arg2;
+- (void)removeSessionOfUser:(id)arg1 isDelMsg:(BOOL)arg2;
+- (void)sortSessions;
+- (void)FFDataSvrMgrSvrFavZZ;
+- (id)getContact:(id)arg1;
+- (id)getSessionContact:(id)arg1;
+- (void)onEnterSession:(id)arg1;
+- (void)loadExtendedMsgData;
+- (void)loadBrandSessionData;
+- (void)loadSessionData;
+- (void)loadData;
+@end
+
+#pragma mark - WeChat
+@interface WeChat : NSObject
++ (id)sharedInstance;
+- (BOOL)isLoggedIn;
+@end
+
 #endif /* WeChatDefine_h */
